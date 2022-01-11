@@ -2,4 +2,4 @@
 
 export const SAVE_EMAIL = 'SAVE_EMAIL';
 
-export const saveEmailAction = (value) => ({ type: SAVE_EMAIL, value})
+export const saveEmailAction = (value) => ({ type: SAVE_EMAIL, value });
