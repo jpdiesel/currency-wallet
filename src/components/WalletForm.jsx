@@ -88,7 +88,8 @@ class WalletForm extends React.Component {
             >
               { Object
                 .values(currencyCode)
-                .filter((currency) => (currency.codein !== 'BRLT'))
+                .filter((currency) => (
+                  currency.codein !== 'BRLT' && currency.code !== 'DOGE'))
                 .map((currency, index) => (
                   <option
                     key={ index }
