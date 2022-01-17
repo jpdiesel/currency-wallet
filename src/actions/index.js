@@ -10,6 +10,7 @@ export function fetchExpenses(infos) {
   return async (dispatch) => {
     const apiFetch = await fetch('https://economia.awesomeapi.com.br/json/all');
     const data = await apiFetch.json();
+    console.log(data);
     console.log(infos);
     dispatch(saveExpensesAction());
   };
