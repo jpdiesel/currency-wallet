@@ -2,44 +2,39 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 
-// const emptyArr = [];
-
 class TableForm extends Component {
-  getCurrencyName = () => {
+  componentDidMount() {
     const { infos } = this.props;
-    if (infos) {
-      const exchangeRates = infos.map((currency) => currency.exchangeRates);
-      const currency = infos.map((currencies) => currencies.currency);
-      return Object
-        .entries(...exchangeRates)
-        .find((moeda) => moeda[0] === currency[0])[1].name;
-    }
+    const value = infos.map((currencies) => currencies);
+    console.log(value);
   }
 
-  getCurrencyValue = () => {
-    const { infos } = this.props;
-    if (infos) {
-      const exchangeRates = infos.map((currency) => currency.exchangeRates);
-      const currency = infos.map((currencies) => currencies.currency);
-      return Number(Object
-        .entries(...exchangeRates)
-        .find((moeda) => moeda[0] === currency[0])[1].ask)
-        .toFixed(2);
-    }
+  // componentDidUpdate() {
+  //   // const { infos } = this.props;
+  //   // // const exchangeRates = infos.map((currency) => currency.exchangeRates);
+  //   // // const currency = infos.map((currencies) => currencies.currency);
+  //   // if (infos.length > 1) {
+  //   //   const nao = Object.entries(infos.map((currency) => currency.exchangeRates).find((moeda) => moeda));
+  //   //   console.log(nao);
+  //   // }
+  // }
+
+  getCurrencyName = (moeda) => {
+    const { currency, exchangeRates } = moeda;
+    const coin = exchangeRates[currency].name;
+    return coin;
   }
 
-  getCurrencyConversion() {
-    const { infos } = this.props;
-    if (infos) {
-      const exchangeRates = infos.map((currency) => currency.exchangeRates);
-      const currency = infos.map((currencies) => currencies.currency);
-      const value = infos.map((currencies) => currencies.value);
-      const total = Number(Object
-        .entries(...exchangeRates)
-        .find((moeda) => moeda[0] === currency[0])[1].ask)
-        * Number(value[0]);
-      return total.toFixed(2);
-    }
+  getCurrencyValue = (moeda) => {
+    const { currency, exchangeRates } = moeda;
+    const coin = exchangeRates[currency].ask;
+    return Number(coin).toFixed(2);
+  }
+
+  getCurrencyConversion(moeda) {
+    const { currency, exchangeRates, value } = moeda;
+    const coin = exchangeRates[currency].ask;
+    return Number(coin * value).toFixed(2);
   }
 
   render() {
@@ -69,17 +64,17 @@ class TableForm extends Component {
                 <td>{moeda.value}</td>
                 <td>
                   {
-                    this.getCurrencyName()
+                    this.getCurrencyName(moeda)
                   }
                 </td>
                 <td>
                   {
-                    this.getCurrencyValue()
+                    this.getCurrencyValue(moeda)
                   }
                 </td>
                 <td>
                   {
-                    this.getCurrencyConversion()
+                    this.getCurrencyConversion(moeda)
                   }
                 </td>
                 <td>Real</td>
@@ -98,6 +93,7 @@ const mapStateToProps = (state) => ({
   method: state.wallet.expenses.method,
   value: state.wallet.expenses.value,
   infos: state.wallet.expenses,
+  manos: state,
 });
 
 export default connect(mapStateToProps, null)(TableForm);
