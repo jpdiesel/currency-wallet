@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
+import { deleteExpenses, editMode } from '../actions';
 
 class TableForm extends Component {
+  // constructor (){
+  //   super();
+    // this.state = {
+    //   editMode: false,
+    // }
+    // this.editExpensesMode = this.editExpensesMode.bind(this)
+  // }
+
   componentDidMount() {
     const { infos } = this.props;
     const value = infos.map((currencies) => currencies);
-    console.log(value);
+    // console.log(value);
   }
 
   // componentDidUpdate() {
@@ -37,8 +46,24 @@ class TableForm extends Component {
     return Number(coin * value).toFixed(2);
   }
 
+  deleteExpenses(expenses) {
+    const { deleteExpenses } = this.props;
+    deleteExpenses(expenses);
+  }
+
+  // editExpensesMode (mode) {
+    // const { editMode } = this.state;
+    // if (editMode) {
+    //   this.setState({ editMode: false })
+    // } else {
+    //   this.setState({ editMode: true })
+    // }
+    // console.log(editMode);
+  // }
+
   render() {
-    const { infos } = this.props;
+    const { infos, editMode } = this.props;
+    // console.log(infos)
     return (
       <div>
         <table>
@@ -52,7 +77,8 @@ class TableForm extends Component {
               <th>Câmbio utilizado</th>
               <th>Valor convertido</th>
               <th>Moeda de conversão</th>
-              <th>Editar/Excluir</th>
+              <th>Editar</th>
+               <th>Excluir</th>
             </tr>
           </thead>
           <tbody>
@@ -78,6 +104,20 @@ class TableForm extends Component {
                   }
                 </td>
                 <td>Real</td>
+                <td>
+                  <button
+                    onClick={ () => editMode(true, moeda) }
+                  >
+                    Editar
+                  </button>
+                </td>
+                <td>
+                  <button 
+                    onClick={ () => this.deleteExpenses(moeda) }
+                  >
+                    Excluir
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -93,10 +133,14 @@ const mapStateToProps = (state) => ({
   method: state.wallet.expenses.method,
   value: state.wallet.expenses.value,
   infos: state.wallet.expenses,
-  manos: state,
 });
 
-export default connect(mapStateToProps, null)(TableForm);
+const mapDispatchToProps = (dispatch) => ({
+  deleteExpenses: (expenses) => dispatch(deleteExpenses(expenses)),
+  editMode: (mode, infos) => dispatch(editMode(mode, infos))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TableForm);
 
 TableForm.propTypes = {
   description: propTypes.string,

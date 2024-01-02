@@ -6,6 +6,7 @@ class Header extends Component {
   expensesSum = (moeda) => moeda.reduce((acc, curr) => {
     const { currency, exchangeRates, value } = curr;
     const coin = exchangeRates[currency].ask;
+    // console.log(coin)
     return Number(Number(coin * value) + Number(acc)).toFixed(2);
   }, 0);
 
