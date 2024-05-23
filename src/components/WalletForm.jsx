@@ -113,49 +113,65 @@ class WalletForm extends React.Component {
       <div>
         {currencies
           ? (
-            <section>
-              <label htmlFor="value-input">
-                Valor gasto
+            <section className='settings'>
+              <div>
+                <label htmlFor="value-input">
+                  Valor gasto
+                </label>
                 <input
+                  id="spent-value"
                   type="number"
                   data-testid="value-input"
                   name="spentValue"
                   value={ spentValue }
                   onChange={ this.handleChanges }
                 />
-              </label>
-              <label htmlFor="description-input">
-                Descrição
+              </div>
+              <div>
+                <label htmlFor="description-input">
+                  Descrição
+                </label>
                 <input
-                  type="text"
-                  data-testid="description-input"
-                  name="descriptions"
-                  value={ descriptions }
-                  onChange={ this.handleChanges }
-                />
-              </label>
-              <label htmlFor="currencys">
-                Moeda
+                    type="text"
+                    data-testid="description-input"
+                    name="descriptions"
+                    value={ descriptions }
+                    onChange={ this.handleChanges }
+                  />
+              </div>
+              <div>
+                <label htmlFor="currencys">
+                  Moeda
+                </label>
                 <select
-                  id="currencys"
-                  data-testid="currency-input"
-                  name="currencys"
-                  value={ currencys }
+                    id="currencys"
+                    data-testid="currency-input"
+                    name="currencys"
+                    value={ currencys }
+                    onChange={ this.handleChanges }
+                  >
+                    <Options />
+                </select>
+              </div>
+              <div>
+                <label htmlFor='payMethod'>
+                  Método de pagamento
+                </label>
+                <select
+                  data-testid="method-input"
+                  name="payMethod"
+                  value={ payMethod }
                   onChange={ this.handleChanges }
                 >
-                  <Options />
+                  <option value="Dinheiro">Dinheiro</option>
+                  <option value="Cartão de crédito">Cartão de crédito</option>
+                  <option value="Cartão de débito">Cartão de débito</option>
                 </select>
+              </div>
+              <div>
+              <label htmlFor='tags'>
+                Tags
               </label>
-              <select
-                data-testid="method-input"
-                name="payMethod"
-                value={ payMethod }
-                onChange={ this.handleChanges }
-              >
-                <option value="Dinheiro">Dinheiro</option>
-                <option value="Cartão de crédito">Cartão de crédito</option>
-                <option value="Cartão de débito">Cartão de débito</option>
-              </select>
               <select
                 data-testid="tag-input"
                 name="tags"
@@ -168,6 +184,7 @@ class WalletForm extends React.Component {
                 <option value="Transporte">Transporte</option>
                 <option value="Saúde">Saúde</option>
               </select>
+             </div>
               { editMode 
               ? <button type='submit' onClick={ this.editExpenses } >Alterar despesa</button>
               : <button type="submit" onClick={ this.onSubmit }>Adicionar despesa</button>

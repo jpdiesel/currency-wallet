@@ -1,0 +1,53 @@
+.main-page {
+  text-align: center;
+}
+
+.table-head {
+  margin-top: 50px;
+  margin-left: 150px;
+  width: 600px;
+  text-align: center;
+}
+
+table td {
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+.right-head {
+  padding-left: 15px;
+}
+
+.mid-head {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.left-head {
+  padding-right: 15px;
+}
+
+input, label {
+  display: block;
+}
+
+.settings {
+  display: flex;
+  flex-direction: row;
+  margin-left: 230px;
+}
+
+.settings div {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#spent-value {
+  width: 100px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

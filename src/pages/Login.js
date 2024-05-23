@@ -2,6 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { saveEmailAction } from '../actions';
+import '../styles/Login.css'
 
 const EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 const passLength = 6;
@@ -45,8 +46,8 @@ class Login extends React.Component {
   render() {
     const { password, email } = this.state;
     return (
-      <section>
-        <label htmlFor="email">
+      <section className="login-form">
+        <label className='email' htmlFor="email">
           Email
           <input
             id="email"
@@ -57,7 +58,7 @@ class Login extends React.Component {
             value={ email }
           />
         </label>
-        <label htmlFor="password">
+        <label className='password' htmlFor="password">
           Senha
           <input
             id="password"
@@ -69,6 +70,7 @@ class Login extends React.Component {
           />
         </label>
         <button
+          className='login-button'
           type="button"
           disabled={ this.enableSubmitBttn() }
           onClick={ this.onSubmit }

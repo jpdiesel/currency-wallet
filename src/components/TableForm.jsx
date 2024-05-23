@@ -65,26 +65,26 @@ class TableForm extends Component {
     const { infos, editMode } = this.props;
     // console.log(infos)
     return (
-      <div>
+      <div className='table-head'>
         <table>
           <thead>
             <tr>
-              <th>Descrição</th>
-              <th>Tag</th>
-              <th>Método de pagamento</th>
-              <th>Valor</th>
-              <th>Moeda</th>
-              <th>Câmbio utilizado</th>
-              <th>Valor convertido</th>
-              <th>Moeda de conversão</th>
-              <th>Editar</th>
-               <th>Excluir</th>
+              <th className='left-head'>Descrição</th>
+              <th className='mid-head'>Tag</th>
+              <th className='mid-head'>Método de pagamento</th>
+              <th className='mid-head'>Valor</th>
+              <th className='mid-head'>Moeda</th>
+              <th className='mid-head'>Câmbio utilizado</th>
+              <th className='mid-head'>Valor convertido</th>
+              <th className='mid-head'>Moeda de conversão</th>
+              <th className='mid-head'>Editar</th>
+              <th className='right-head'>Excluir</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className='table-body'>
             {infos.map((moeda, index) => (
               <tr key={ index }>
-                <td>{moeda.description}</td>
+                <td class="linebreak">{moeda.description}</td>
                 <td>{moeda.tag}</td>
                 <td>{moeda.method}</td>
                 <td>{moeda.value}</td>
